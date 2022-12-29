@@ -1,0 +1,120 @@
+.a{
+ 
+    margin-left: 20%;
+    margin-right: 20%;
+  }
+  
+    input,select {
+     
+      box-sizing: border-box;
+      width: 100%;
+      border-radius: 4px; 
+      padding: 10px 15px;
+      margin-bottom: 10px;
+      font-size: 14px;
+      border: 2px solid black;
+    }
+    
+    label {
+      /* line-height: 2; */
+      /* text-align: left; */
+      padding: 10px 15px;
+      display: block;
+      font-size: 14px;
+      font-weight: 600;
+    }
+    
+    button[type="submit"],
+    input[type="submit"], input[type="reset"] {
+      background: #e6fbff;
+     
+      text-transform: uppercase;
+      border: none;
+      font-size: 16px;
+      font-weight: 100;
+      letter-spacing: 10px;
+     
+    }
+    
+    button[type="submit"]:hover,
+    input[type="submit"]:hover, input[type="reset"]:hover {
+      background: #02a8de;
+    }
+    
+    button[type="submit"]:active,
+    input[type="button"]:active,
+    input[type="submit"]:active {
+      transition: 0.3s all;
+      transform: translateY(3px);
+      border: 1px solid transparent;
+      opacity: 0.8;
+    }
+    
+    input:disabled {
+      opacity: 0.4;
+    }
+    
+    input,select[type="button"]:hover {
+      transition: 0.3s all;
+    }
+    
+    button[type="submit"],
+    input[type="button"],
+    input[type="submit"] {
+      -webkit-appearance: none;
+    }
+  
+  
+    h4.MuiTypography-root.LeftSidebarLayout-lightTitle-83.MuiTypography-h4 {
+      display: none;
+  }
+  
+  .Header-appBar-84.Header-left-90 .Header-headerTitle-134 {
+    display: none;
+  }
+  
+  .LeftSidebarLayout-pageTitle-2896 h4 {
+    display: none;
+  }
+  
+  .LeftSidebarLayout-pageTitle-447 h4 {
+    display: none;
+  }
+  .Header-appBar-450.Header-left-456 .Header-headerTitle-500 {
+    display: none;
+  }
+  
+    
+  h4.MuiTypography-root{
+    display: none;
+  }
+  
+  /* h4.MuiTypography-root{
+    display: none;
+  } */
+  
+
+  .erroeMassage {
+    color: #bf1650;
+  }
+  
+  
+  .erroeMassage::before {
+    display: inline;
+    content: "⚠ ";
+  }
+
+
+  
+  
+  
+
+
+
+    
+   
+    
+    
+    
+   
+    
