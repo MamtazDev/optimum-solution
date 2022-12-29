@@ -286,7 +286,8 @@ function BasicTable(props) {
                           <TableCell align="left">Email</TableCell>
                           <TableCell align="left">Type d’assurance </TableCell>
                           <TableCell align="left">Compagnie</TableCell>
-                          {/* <TableCell align="left">Signature</TableCell> */}
+                          <TableCell align="left">New</TableCell>
+                          <TableCell align="left">Signature</TableCell>
                           <TableCell align="left"> Montant</TableCell>
                           <TableCell align="left">operation</TableCell>
                           <TableCell align="left">Action</TableCell>
@@ -342,20 +343,20 @@ function BasicTable(props) {
                                 {value?.user?.emailUser}
                               </TableCell>
 
-                              <TableCell align="left">
+                              <TableCell >
                                 {value?.packassurance?.nomAssur}
                               </TableCell>
-                              <TableCell align="left">
+                              <TableCell >
                                 {value?.packassurance?.compagnie?.nomCompagnie}
                               </TableCell>
-                              <TableCell align="left">
+                              <TableCell >
                                 {value?.prixAssur}
                               </TableCell>
-                              <TableCell align="left">
+                              <TableCell >
                                 {value?.operation}
                               </TableCell>
 
-                              <TableCell align="left">
+                              <TableCell >
                                 {value?.operation == "Traité" ? (
                                   <Button
                                     onClick={() =>
@@ -377,7 +378,7 @@ function BasicTable(props) {
                                 )}
                               </TableCell>
 
-                              <TableCell align="left">
+                              <TableCell >
                                 {value?.operation == "Traité" ? (
                                   <Button
                                     onClick={() =>
@@ -391,7 +392,7 @@ function BasicTable(props) {
                                 )}
                               </TableCell>
 
-                              <TableCell align="left">
+                              <TableCell>
                                 <i
                                   class="fa-solid fa-trash-can"
                                   style={{

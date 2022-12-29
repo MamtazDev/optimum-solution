@@ -87,9 +87,7 @@ function StrippedTable(props) {
                     // onClick={() => handleOpenUserDetails(setSentData(user))}
                     style={{ cursor: "pointer", color: "#01b1da" }}
                   >
-                    <Link to="details">
-                    {user.prenomUser}
-                    </Link>
+                    <Link to="details">{user.prenomUser}</Link>
                   </TableCell>
                   <TableCell align="left">{user.emailUser}</TableCell>
 
@@ -101,16 +99,8 @@ function StrippedTable(props) {
                   </TableCell>
                   <TableCell align="left">
                     <Button onClick={() => handleOpen(setSentData(user))}>
-                      Editer
+                    user-address
                     </Button>
-
-                    {/* <Button
-             onClick={() => handleOpenUserDetails(setSentData(user))}
-             
-            >
-              
-              Editer
-            </Button> */}
                   </TableCell>
 
                   <TableCell align="left">

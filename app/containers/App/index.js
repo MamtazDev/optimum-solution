@@ -6,6 +6,7 @@ import Auth from './Auth';
 import Application from './Application';
 import LoginDedicated from '../Pages/Standalone/LoginDedicated';
 import ThemeWrapper from './ThemeWrapper';
+import Details from './Details';
 window.__MUI_USE_NEXT_TYPOGRAPHY_VARIANTS__ = true;
 
 function App(props) {
@@ -16,7 +17,7 @@ function App(props) {
         <Switch>
           <Route path="/" exact component={LoginDedicated} />
           <Route path="/app" component={Application} />
-          {/* <Route path="/details" component={Details} /> */}
+          <Route path="/details/:id" component={Details} />
           <Route component={Auth} />
           <Route component={NotFound} />
         </Switch>
