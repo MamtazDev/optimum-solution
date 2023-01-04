@@ -101,7 +101,7 @@ function StrippedTable(props) {
 
                   <TableCell align="left">
                     <Button onClick={() => handleOpen(setSentData(user))}>
-                      Modifier adresse & Téléphone
+                    MODIFIER ADDRESSE
                     </Button>
                   </TableCell>
 
