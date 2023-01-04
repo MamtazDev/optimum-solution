@@ -73,7 +73,7 @@ const UpdateOffer = ({open,handleClose,sentModalData}) => {
            {/* <input defaultValue={sentModalData.operation} {...register("operation")} /> */}
 
             <select {...register("operation", { required: true })} onChange={() => setFileSelect1(1)}>
-            <option value=""> Indiquez l’état de l’assurance </option>
+            <option value="">choisir une option </option>
             <option value="Traité">Traité</option>
             <option value="En traitement">En traitement</option>
           </select>

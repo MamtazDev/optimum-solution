@@ -1,9 +1,6 @@
+import { Box, Modal } from "@mui/material";
 import React, { useState } from "react";
-import Modal from "@mui/material/Modal";
-import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
-import { Controller, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 const style = {
   position: "absolute",
   top: "50%",
@@ -15,9 +12,7 @@ const style = {
   boxShadow: 24,
   p: 4,
 };
-
-const UpdateUserInfo = ({ open, handleClose, sentData }) => {
-  console.log(sentData.id);
+const UpdateAddress = ({ open, handleClose, sentData }) => {
   const {
     register,
     handleSubmit,
@@ -72,49 +67,27 @@ const UpdateUserInfo = ({ open, handleClose, sentData }) => {
               type="hidden"
             />
 
-            {/* <label>Adresse:</label>
-          <input defaultValue="" {...register("adrUser" , { required: true })} onChange={() => setFileSelect(1)}/>
-          {errors?.adrUser?.type === "required" && <p className='erroeMassage'>Adresse est requis</p>}
-
-          <label>Localité:</label>
-          <input defaultValue="" {...register("localityUser" , { required: true })} onChange={() => setFileSelect1(1)}/>
-          {errors?.localityUser?.type === "required" && <p className='erroeMassage'>Localité est requis</p>} */}
-
-            <label>Email:</label>
+            <label>Adresse:</label>
             <input
               defaultValue=""
-              {...register("email", { required: true })}
+              {...register("adrUser", { required: true })}
               onChange={() => setFileSelect(1)}
             />
             {errors?.adrUser?.type === "required" && (
-              <p className="erroeMassage">Email est requis</p>
+              <p className="erroeMassage">Adresse est requis</p>
             )}
 
-            <label>Nationalité:</label>
+            <label>Localité:</label>
             <input
               defaultValue=""
-              {...register("nationality", { required: true })}
+              {...register("localityUser", { required: true })}
               onChange={() => setFileSelect1(1)}
             />
             {errors?.localityUser?.type === "required" && (
-              <p className="erroeMassage">Nationalité est requis</p>
+              <p className="erroeMassage">Localité est requis</p>
             )}
 
-            <label>Télephone Utilisateur:</label>
-            <input
-              defaultValue=""
-              {...register("telUser", { required: true })}
-              onChange={() => setFileSelect1(1)}
-              onKeyDown={(e) =>
-                ["e", "E", "-"].includes(e.key) && e.preventDefault()
-              }
-              type="Number"
-            />
-            {errors?.telUser?.type === "required" && (
-              <p className="erroeMassage">Téléphone est requis</p>
-            )}
-
-            {/* <label>Validité Adresse:</label>
+            <label>Validité Adresse:</label>
 
             <input
               defaultValue=""
@@ -128,7 +101,7 @@ const UpdateUserInfo = ({ open, handleClose, sentData }) => {
 
             {errors?.validiteAdresse?.type === "required" && (
               <p className="erroeMassage">Validité Adresse est requis</p>
-            )} */}
+            )}
             <br />
 
             <Box sx={{ mt: 5 }}>
@@ -164,4 +137,4 @@ const UpdateUserInfo = ({ open, handleClose, sentData }) => {
   );
 };
 
-export default UpdateUserInfo;
+export default UpdateAddress;

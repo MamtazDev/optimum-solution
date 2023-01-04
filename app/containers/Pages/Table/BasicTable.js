@@ -18,6 +18,7 @@ import AccordionSummary from "@mui/material/AccordionSummary";
 import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import "../Table/style.css";
+import EditerPrixStatut from "../../../utils/EditerPrixStatut";
 // try
 
 function BasicTable(props) {
@@ -50,6 +51,10 @@ function BasicTable(props) {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
+  const [openForPrix, setOpenForPrix] = React.useState(false);
+  const handleOpenForPrix = () => setOpenForPrix(true);
+  const handleCloseForPrix = () => setOpenForPrix(false);
+
   const [openForTraiter, setOpenForTraiter] = React.useState(false);
   const handleOpenForTraiter = () => setOpenForTraiter(true);
   const handleCloseForTraiter = () => setOpenForTraiter(false);
@@ -57,7 +62,7 @@ function BasicTable(props) {
   // api call for email
   const [userProfileData, setUserProfileData] = useState("");
   const email = localStorage.getItem("email");
-  console.log(userProfileData);
+  // console.log(userProfileData);
 
   fetch(
     `https://app-optimumsolutions.ch/api/authentication/get-user-by-email/${email}`
@@ -98,7 +103,7 @@ function BasicTable(props) {
           u.user.emailUser === user.user.emailUser && u !== user.user.emailUser
       )
     ) {
-      console.log("loop kaj korteche");
+      // console.log("loop kaj korteche");
 
       acc[user.user.emailUser] = (acc[user.user.emailUser] || []).concat(user);
 
@@ -152,7 +157,7 @@ function BasicTable(props) {
                   <TableCell align="left">Email</TableCell>
                   <TableCell align="left">Type d’assurance </TableCell>
                   <TableCell align="left">Compagnie</TableCell>
-                  {/* <TableCell align="left">Signature</TableCell> */}
+
                   <TableCell align="left"> Montant</TableCell>
                   <TableCell align="left">operation</TableCell>
                   <TableCell align="left">Action</TableCell>
@@ -285,129 +290,130 @@ function BasicTable(props) {
                           <TableCell align="left">Prénom</TableCell>
                           <TableCell align="left">Email</TableCell>
                           <TableCell align="left">Type d’assurance </TableCell>
-                          <TableCell align="left">Compagnie</TableCell>
+                          {/* <TableCell align="left">Compagnie</TableCell> */}
+                          <TableCell align="left">Montant </TableCell>
                           {/* <TableCell align="left">Signature</TableCell> */}
-                          <TableCell align="left"> Montant</TableCell>
+                          <TableCell align="left"> Statut</TableCell>
                           <TableCell align="left">operation</TableCell>
                           <TableCell align="left">Action</TableCell>
                         </TableRow>
                       </TableHead>
-                    </Table>
 
-                    {Object.entries(userData).map(([key, value]) => (
-                      <AccordionDetails>
-                        <Table>
-                          <TableBody>
-                            <TableRow>
-                              <TableCell align="left">{key}</TableCell>
+                      <TableBody>
+                        {Object.entries(userData).map(([key, value]) => (
+                          <TableRow>
+                            <TableCell align="left">{key}</TableCell>
 
-                              {userProfileData == "admin" ? (
-                                <>
-                                  <TableCell
-                                    align="left"
-                                    style={{
-                                      cursor: "pointer",
-                                      color: "#01b1da",
-                                    }}
-                                    onClick={() =>
-                                      handleOpen(setSentModalData([value, 1]))
-                                    }
-                                  >
-                                    {value?.user?.nomUser}
-                                  </TableCell>
-                                  <TableCell
-                                    align="left"
-                                    style={{
-                                      cursor: "pointer",
-                                      color: "#01b1da",
-                                    }}
-                                    onClick={() =>
-                                      handleOpen(setSentModalData([value, 1]))
-                                    }
-                                  >
-                                    {value?.user?.prenomUser}
-                                  </TableCell>
-                                </>
-                              ) : (
-                                <>
-                                  <TableCell align="left">
-                                    {value?.user?.nomUser}
-                                  </TableCell>
-                                  <TableCell align="left">
-                                    {value?.user?.prenomUser}
-                                  </TableCell>
-                                </>
-                              )}
-                              <TableCell align="left">
-                                {value?.user?.emailUser}
-                              </TableCell>
+                            {userProfileData == "admin" ? (
+                              <>
+                                <TableCell
+                                  align="left"
+                                  style={{
+                                    cursor: "pointer",
+                                    color: "#01b1da",
+                                  }}
+                                  onClick={() =>
+                                    handleOpen(setSentModalData([value, 1]))
+                                  }
+                                >
+                                  {value?.user?.nomUser}
+                                </TableCell>
+                                <TableCell
+                                  align="left"
+                                  style={{
+                                    cursor: "pointer",
+                                    color: "#01b1da",
+                                  }}
+                                  onClick={() =>
+                                    handleOpen(setSentModalData([value, 1]))
+                                  }
+                                >
+                                  {value?.user?.prenomUser}
+                                </TableCell>
+                              </>
+                            ) : (
+                              <>
+                                <TableCell align="left">
+                                  {value?.user?.nomUser}
+                                </TableCell>
+                                <TableCell align="left">
+                                  {value?.user?.prenomUser}
+                                </TableCell>
+                              </>
+                            )}
+                            <TableCell align="left">
+                              {value?.user?.emailUser}
+                            </TableCell>
 
-                              <TableCell align="left">
-                                {value?.packassurance?.nomAssur}
-                              </TableCell>
-                              <TableCell align="left">
+                            <TableCell>
+                              {value?.packassurance?.nomAssur}
+                            </TableCell>
+                            {/* <TableCell>
                                 {value?.packassurance?.compagnie?.nomCompagnie}
-                              </TableCell>
-                              <TableCell align="left">
-                                {value?.prixAssur}
-                              </TableCell>
-                              <TableCell align="left">
-                                {value?.operation}
-                              </TableCell>
+                              </TableCell> */}
+                            <TableCell>{value?.prixAssur}</TableCell>
+                            <TableCell>{value?.operation}</TableCell>
 
-                              <TableCell align="left">
-                                {value?.operation == "Traité" ? (
-                                  <Button
-                                    onClick={() =>
-                                      handleOpenForTraiter(
-                                        setSentModalData(value)
-                                      )
-                                    }
-                                  >
-                                    Voir le contrat
-                                  </Button>
-                                ) : (
-                                  <Button
-                                    onClick={() =>
-                                      handleOpen(setSentModalData(value))
-                                    }
-                                  >
-                                    Traiter
-                                  </Button>
-                                )}
-                              </TableCell>
+                            <TableCell>
+                              {value?.operation == "Traité" ? (
+                                <Button
+                                  onClick={() =>
+                                    handleOpenForTraiter(
+                                      setSentModalData(value)
+                                    )
+                                  }
+                                >
+                                  Voir le contrat
+                                </Button>
+                              ) : (
+                                <Button
+                                  onClick={() =>
+                                    handleOpen(setSentModalData(value))
+                                  }
+                                >
+                                  Traiter
+                                </Button>
+                              )}
+                            </TableCell>
 
-                              <TableCell align="left">
-                                {value?.operation == "Traité" ? (
+                            <TableCell>
+                              {value?.operation == "Traité" ? (
+                                <div>
                                   <Button
                                     onClick={() =>
                                       handleOpen(setSentModalData(value))
                                     }
                                   >
                                     Editer
+                                  </Button>{" "}
+                                  |
+                                  <Button
+                                    onClick={() =>
+                                      handleOpenForPrix(setSentModalData(value))
+                                    }
+                                  >
+                                    Editer montant - statut
                                   </Button>
-                                ) : (
-                                  <> </>
-                                )}
-                              </TableCell>
+                                </div>
+                              ) : (
+                                <> </>
+                              )}
+                            </TableCell>
 
-                              <TableCell align="left">
-                                <i
-                                  class="fa-solid fa-trash-can"
-                                  style={{
-                                    cursor: "pointer",
-                                    color: "#01b0da",
-                                  }}
-                                  onClick={() =>
-                                    handleDeleteInsurance(value?.id)
-                                  }
-                                ></i>
-                              </TableCell>
-                            </TableRow>
-                          </TableBody>
-                        </Table>
-                      </AccordionDetails>
-                    ))}
+                            <TableCell>
+                              <i
+                                class="fa-solid fa-trash-can"
+                                style={{
+                                  cursor: "pointer",
+                                  color: "#01b0da",
+                                }}
+                                onClick={() => handleDeleteInsurance(value?.id)}
+                              ></i>
+                            </TableCell>
+                          </TableRow>
+                        ))}
+                      </TableBody>
+                    </Table>
                   </Accordion>
                 </div>
               ))}
@@ -420,6 +426,12 @@ function BasicTable(props) {
         open={open}
         sentModalData={sentModalData}
       ></UpdateInsurance>
+
+      <EditerPrixStatut
+        handleCloseForPrix={handleCloseForPrix}
+        openForPrix={openForPrix}
+        sentModalData={sentModalData}
+      ></EditerPrixStatut>
 
       <UpdateInsuranceForTraite
         handleCloseForTraiter={handleCloseForTraiter}
