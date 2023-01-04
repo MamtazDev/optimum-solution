@@ -114,6 +114,7 @@ function ReduxForm() {
   };
 
   return (
+    <>
     <div>
       <Helmet>
         <title>{title}</title>
@@ -163,7 +164,7 @@ function ReduxForm() {
                       {user[0]?.packoffre?.nomOffre}
                     </TableCell>
 
-                    {/* <TableCell align="left"><img src={user.signature} className="w3-left w3-circle w3-margin-right" width="100px" height="40px" /></TableCell> */}
+                    {/* <TableCell align="left"><img src={user.signature} className="w3-left w3-circle w3-margin-left" width="100px" height="40px" /></TableCell> */}
 
                     <TableCell align="left">{user[0]?.prixOffre}</TableCell>
                     <TableCell align="left">{user?.operation}</TableCell>
@@ -198,8 +199,11 @@ function ReduxForm() {
             </Table>
           </div>
 
+
+
+
           <div>
-            <Table className="w">
+            <Table >
               {Object.entries(values).map(([userId, userData]) => (
                 <div key={userId}>
                   <Accordion
@@ -228,87 +232,93 @@ function ReduxForm() {
                       </Typography>
                     </AccordionSummary>
 
-                    
-                      <TableHead className="w">
-                        <TableRow className="w">
+                    <Table>
+                      <TableHead>
+                        <TableRow>
                           {/* <TableCell align="left">No.</TableCell> */}
-                          <TableCell align="right">Nom</TableCell>
-                          <TableCell align="right">Prénom</TableCell>
-                          <TableCell align="right">Email</TableCell>
-                          <TableCell align="right">Type d’offre</TableCell>
+                          <TableCell align="left">Nom</TableCell>
+                          <TableCell align="left">Prénom</TableCell>
+                          <TableCell align="left">Email</TableCell>
+                          <TableCell align="left">Type d’offre</TableCell>
 
-                          <TableCell align="right">Montant</TableCell>
+                          <TableCell align="left">Montant</TableCell>
 
-                          <TableCell align="right">operation</TableCell>
+                          <TableCell align="left">operation</TableCell>
 
-                          <TableCell align="right">Action </TableCell>
+                          <TableCell align="left">Action </TableCell>
                         </TableRow>
                       </TableHead>
-                    
-                      
-                    {Object.entries(userData).map(([key, value]) => (
-                      <AccordionDetails >
-                        
-                            <TableRow >
-                              <TableCell align="right" >
-                                {value?.user?.nomUser}
-                              </TableCell>
-                              <TableCell align="right">
-                                {value?.user?.prenomUser}
-                              </TableCell>
-                              <TableCell align="right">
-                                {value?.user.emailUser}
-                              </TableCell>
-                              <TableCell align="right">
-                                {value?.user.emailUser}
-                              </TableCell>
-                              <TableCell align="right">
-                                {value?.packoffre?.nomOffre}
-                              </TableCell>
-                              <TableCell align="right">
-                                {value?.prixOffre}
-                              </TableCell>
-                              <TableCell align="right">
-                                {value?.operation}
-                              </TableCell>
-                              <TableCell align="right">
-                                {" "}
-                                {value?.operation == "Traité" ? (
-                                  <Button
-                                    onClick={() =>
-                                      handleOpen(setSentModalData(value))
-                                    }
-                                    disabled="disabled"
-                                  >
-                                    Traiter
-                                  </Button>
-                                ) : (
-                                  <Button
-                                    onClick={() =>
-                                      handleOpen(setSentModalData(value))
-                                    }
-                                  >
-                                    Traiter
-                                  </Button>
-                                )}
-                              </TableCell>
 
-                              <TableCell align="left">
-                                <i
-                                  class="fa-solid fa-trash-can"
-                                  style={{
-                                    cursor: "pointer",
-                                    color: "#01b0da",
-                                  }}
-                                  onClick={() =>
-                                    handleDeleteInsurance(value?.id)
-                                  }
-                                ></i>
-                              </TableCell>
-                            </TableRow>
+
+                      <TableBody>
+                      {Object.entries(userData).map(([key, value]) => (
+                     
                          
-                      </AccordionDetails>
-                    ))}
+                     <TableRow >
+                       <TableCell align="left" >
+                         {value?.user?.nomUser}
+                       </TableCell>
+                       <TableCell align="left">
+                         {value?.user?.prenomUser}
+                       </TableCell>
+                       <TableCell align="left">
+                         {value?.user.emailUser}
+                       </TableCell>
+                       {/* <TableCell align="left">
+                         {value?.user.emailUser}
+                       </TableCell> */}
+                       <TableCell align="left">
+                         {value?.packoffre?.nomOffre}
+                       </TableCell>
+                       <TableCell align="left">
+                         {value?.prixOffre}
+                       </TableCell>
+                       <TableCell align="left">
+                         {value?.operation}
+                       </TableCell>
+                       <TableCell align="left">
+                         {" "}
+                         {value?.operation == "Traité" ? (
+                           <Button
+                             onClick={() =>
+                               handleOpen(setSentModalData(value))
+                             }
+                             disabled="disabled"
+                           >
+                             Traiter
+                           </Button>
+                         ) : (
+                           <Button
+                             onClick={() =>
+                               handleOpen(setSentModalData(value))
+                             }
+                           >
+                             Traiter
+                           </Button>
+                         )}
+                       </TableCell>
+
+                       <TableCell align="left">
+                         <i
+                           class="fa-solid fa-trash-can"
+                           style={{
+                             cursor: "pointer",
+                             color: "#01b0da",
+                           }}
+                           onClick={() =>
+                             handleDeleteInsurance(value?.id)
+                           }
+                         ></i>
+                       </TableCell>
+                     </TableRow>
+                
+               
+             ))}
+                      </TableBody>
+                      
+                      </Table>
+                      
+                    
                   </Accordion>
                 </div>
               ))}
@@ -323,6 +333,7 @@ function ReduxForm() {
         ></UpdateOffer>
       </div>
     </div>
+    </>
   );
 }
 

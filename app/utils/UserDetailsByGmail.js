@@ -1,12 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { TableCell, TableRow } from "@mui/material";
 import UpdateUserInfo from "./UpdateUserInfo";
-
 import { useHistory, useNavigate } from "react-router-dom";
+import UpdateAddress from "./UpdateAddress";
 
 const style = {
   position: "absolute",
@@ -26,19 +26,58 @@ const UserDetailsByGmail = ({
   handleCloseUserDetails,
   sentData,
 }) => {
-  console.log(sentData.id);
-
-  // const navigate = useNavigate();
-  let history = useHistory();
-  const navigateToDetails = (id) => {
-    // navigate(`/app/${id}`);
-    history.push(`/app/user/details/${id}`);
-  };
-
-  // const [sentData, setSentData] = useState([])
   const [open, setOpen] = React.useState(false);
+  const [pdf, setPdf] = React.useState(true);
+
+  console.log({ sentData });
+  console.log("useID: ", sentData?.id);
+
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
+  const navigateToDetails = (id) => {
+    const url = `https://app-optimumsolutions.ch/api/admin/mandat-user-get/${id}`;
+    fetch(url, {
+      method: "GET",
+      headers: {
+        "content-type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        // setPdf(data);
+        console.log("isPDF:", data);
+
+        window.open(
+          "https://app-optimumsolutions.ch/assets/documents/" +
+            data?.data?.pdfMandatDeCourtage
+        );
+      })
+      .catch((err) => console.log("error", err));
+  };
+
+  useEffect(() => {
+    const url = `https://app-optimumsolutions.ch/api/admin/mandat-user-get/${sentData?.id}`;
+    fetch(url, {
+      method: "GET",
+      headers: {
+        "content-type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setPdf(data);
+        console.log("isPDF:", data?.data);
+
+        if (data?.data === null) setPdf(false);
+        if (data?.data !== null) setPdf(true);
+
+
+      })
+      .catch((err) => console.log("error", err));
+  }, [sentData?.id]);
 
   return (
     <div>
@@ -80,17 +119,17 @@ const UserDetailsByGmail = ({
           </Typography>
 
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            <span style={{ fontWeight: "bold" }}>PostalUser:</span>{" "}
+            <span style={{ fontWeight: "bold" }}>Code Postal:</span>{" "}
             {sentData?.postalUser}
           </Typography>
 
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            <span style={{ fontWeight: "bold" }}>LocalityUser:</span>{" "}
+            <span style={{ fontWeight: "bold" }}>Locali:</span>{" "}
             {sentData?.localityUser}
           </Typography>
 
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            <span style={{ fontWeight: "bold" }}>CodeCounsellor:</span>{" "}
+            <span style={{ fontWeight: "bold" }}>Code Conseiller:</span>{" "}
             {sentData?.codeCounsellor}
           </Typography>
 
@@ -114,12 +153,24 @@ const UserDetailsByGmail = ({
             {sentData?.typeusers?.nomTypeUser}
           </Typography>
 
-          {sentData?.typeusers?.nomTypeUser === "admin" ? (
-            <input
-              type="submit"
-              value="Voir le mandat de courtage"
-              onClick={() => navigateToDetails(sentData?.id)}
-            />
+          {sentData?.typeusers?.nomTypeUser === "user" ? (
+            <div>
+              <Typography id="modal-modal-description" sx={{ mt: 2, mb: 2 }}>
+                <span style={{ fontWeight: "bold" }}>Mandat de Courtage:</span>{" "}
+                {pdf ? (
+                  <a
+                    style={{ cursor: "pointer" }}
+                    target="_blank"
+                    onClick={() => navigateToDetails(sentData?.id)}
+                    herf="#"
+                  >
+                    <u>Voir le mandat de courtage</u>
+                  </a>
+                ) : (
+                  <a style={{textDecoration:"none"}} href="#">Pas de Mandat de courtage</a>
+                )}
+              </Typography>
+            </div>
           ) : (
             ""
           )}
@@ -127,7 +178,7 @@ const UserDetailsByGmail = ({
           <input
             style={{ fontWeight: "bold" }}
             type="submit"
-            value="user email & telephone"
+            value="E-mail & Téléphone client"
             onClick={() => handleOpen()}
           />
         </Box>

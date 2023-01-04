@@ -12,11 +12,12 @@ import Button from "@mui/material/Button";
 import UpdateUserInfo from "../../../utils/UpdateUserInfo";
 import UserDetailsByGmail from "../../../utils/UserDetailsByGmail";
 import { Link } from "react-router-dom";
+import UpdateAddress from "../../../utils/UpdateAddress";
 
 function StrippedTable(props) {
   const { classes } = props;
   const { users } = props;
-  console.log("users", users[0]);
+  // console.log("users", users[0]);
 
   const [sentData, setSentData] = useState([]);
   // console.log(sentData)
@@ -84,10 +85,10 @@ function StrippedTable(props) {
                   </TableCell>
                   <TableCell
                     align="left"
-                    // onClick={() => handleOpenUserDetails(setSentData(user))}
+                    onClick={() => handleOpenUserDetails(setSentData(user))}
                     style={{ cursor: "pointer", color: "#01b1da" }}
                   >
-                    <Link to="details">{user.prenomUser}</Link>
+                    {user.prenomUser}
                   </TableCell>
                   <TableCell align="left">{user.emailUser}</TableCell>
 
@@ -97,9 +98,10 @@ function StrippedTable(props) {
                   <TableCell align="left">
                     {user?.typeusers?.nomTypeUser}
                   </TableCell>
+
                   <TableCell align="left">
                     <Button onClick={() => handleOpen(setSentData(user))}>
-                    user-address
+                      Modifier adresse & Téléphone
                     </Button>
                   </TableCell>
 
@@ -117,11 +119,11 @@ function StrippedTable(props) {
         </div>
       </Fragment>
 
-      <UpdateUserInfo
+      <UpdateAddress
         handleClose={handleClose}
         open={open}
         sentData={sentData}
-      ></UpdateUserInfo>
+      ></UpdateAddress>
 
       <UserDetailsByGmail
         handleCloseUserDetails={handleCloseUserDetails}
